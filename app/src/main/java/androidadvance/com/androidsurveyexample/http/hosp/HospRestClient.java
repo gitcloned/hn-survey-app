@@ -8,7 +8,7 @@ import com.loopj.android.http.*;
 
 public class HospRestClient {
 
-    private static final String BASE_URL = "https://q1e4xm6ex0.execute-api.us-east-1.amazonaws.com/Dev/hospital_summary";
+    private static final String BASE_URL = "https://q1e4xm6ex0.execute-api.us-east-1.amazonaws.com/Dev/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
