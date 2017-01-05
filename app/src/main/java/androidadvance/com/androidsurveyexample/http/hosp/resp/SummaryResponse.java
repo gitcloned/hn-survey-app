@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class SummaryResponse {
 
+    public ArrayList<Form> getForms() {
+        return forms;
+    }
+
     ArrayList<Form> forms = new ArrayList<Form>();
 
     public void addForm(Form form) {

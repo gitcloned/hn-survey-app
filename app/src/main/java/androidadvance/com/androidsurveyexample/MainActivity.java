@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
 import com.androidadvance.androidsurvey.SurveyActivity;
 import java.io.IOException;
 import java.io.InputStream;
+
+import androidadvance.com.androidsurveyexample.forms.FormListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ListView formItems = (ListView)
+                findViewById(R.id.listOfForms);
+
+        formItems.setAdapter(new FormListAdapter
+                (MainActivity.this, Config.getInstance().getSummaryResponse().getForms()));
 
         //Nothing fancy here. Plain old simple buttons....
 

@@ -9,6 +9,19 @@ import org.json.JSONObject;
 public class Form {
 
     private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public JSONObject getFormJSON() {
+        return formJSON;
+    }
+
     private String client;
     private JSONObject formJSON;
 

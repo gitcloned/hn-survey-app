@@ -4,6 +4,8 @@ package androidadvance.com.androidsurveyexample.http.hosp;
  * Created by asjain on 1/2/2017.
  */
 
+import android.util.Log;
+
 import org.json.*;
 import com.loopj.android.http.*;
 
@@ -14,11 +16,15 @@ import cz.msebera.android.httpclient.Header;
 
 public class HospRestClientUsage {
 
+    private static final String TAG = "HospRestClientUsage";
+
     public void getSummary(final SummaryResponseListener listener) throws JSONException {
 
         HospRestClient.get("hospital_summary", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                Log.v(TAG, "Hospital Summary, got response");
 
                 SummaryResponse summaryResponse = new SummaryResponse();
 

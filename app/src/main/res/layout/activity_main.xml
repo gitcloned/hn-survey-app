@@ -17,6 +17,15 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
+        <ListView
+            android:id="@+id/listOfForms"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="10dp"
+            android:longClickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
