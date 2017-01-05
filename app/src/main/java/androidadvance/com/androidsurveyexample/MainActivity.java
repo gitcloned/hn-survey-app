@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import androidadvance.com.androidsurveyexample.forms.FormListAdapter;
+import androidadvance.com.androidsurveyexample.http.hosp.resp.Form;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         formItems.setAdapter(new FormListAdapter
                 (MainActivity.this, Config.getInstance().getSummaryResponse().getForms()));
+
+        formItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String value;
+
+                Form form = (Form) parent.getItemAtPosition(position);
+
+                Intent i_survey = new Intent(MainActivity.this, SurveyActivity.class);
+                //you have to pass as an extra the json string.
+                i_survey.putExtra("json_survey", form.getFormContent());
+                startActivityForResult(i_survey, SURVEY_REQUEST);
+            }
+        });
 
         //Nothing fancy here. Plain old simple buttons....
 
