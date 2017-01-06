@@ -42,7 +42,11 @@ public class HospRestClientUsage {
 
                             if(formJSON!=null) {
 
-                                Form form = new Form(formJSON.getString("id"), formJSON.getString("client"), formJSON.getJSONObject("form"));
+                                Form form = new Form(formJSON.getString("id"),
+                                        formJSON.getString("name"),
+                                        formJSON.getString("description"),
+                                        formJSON.getString("client"),
+                                        formJSON.getJSONObject("form"));
                                 summaryResponse.addForm(form);
                             }
                         }

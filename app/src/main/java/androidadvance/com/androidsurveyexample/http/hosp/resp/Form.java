@@ -9,6 +9,17 @@ import org.json.JSONObject;
 public class Form {
 
     private String id;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    private String description;
 
     public String getId() {
         return id;
@@ -25,10 +36,12 @@ public class Form {
     private String client;
     private JSONObject formJSON;
 
-    public Form(String id, String client, JSONObject formJSON) {
+    public Form(String id, String name, String description, String client, JSONObject formJSON) {
 
         this.id = id;
         this.client = client;
+        this.name = name;
+        this.description = description;
         this.formJSON = formJSON;
     }
 

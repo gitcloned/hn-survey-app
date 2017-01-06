@@ -68,9 +68,9 @@ public class FormListAdapter extends BaseAdapter {
         TextView descriptionText = (TextView)
                 itemView.findViewById(R.id.formDescription);
 
-        String title = "Form A";
+        String title = ((Form)getItem(i)).getName();
         titleText.setText(title);
-        String description = "Form Description";
+        String description = ((Form)getItem(i)).getDescription();
         if (description.trim().length() == 0) {
             description = "";
         }

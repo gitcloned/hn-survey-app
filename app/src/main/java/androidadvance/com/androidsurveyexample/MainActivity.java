@@ -40,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent i_survey = new Intent(MainActivity.this, SurveyActivity.class);
                 //you have to pass as an extra the json string.
                 i_survey.putExtra("json_survey", form.getFormContent());
+                i_survey.putExtra("form_id", form.getId());
                 startActivityForResult(i_survey, SURVEY_REQUEST);
             }
         });
 
         //Nothing fancy here. Plain old simple buttons....
 
-        Button button_survey_example_1 = (Button) findViewById(R.id.button_survey_example_1);
+        /*Button button_survey_example_1 = (Button) findViewById(R.id.button_survey_example_1);
         Button button_survey_example_2 = (Button) findViewById(R.id.button_survey_example_2);
         Button button_survey_example_3 = (Button) findViewById(R.id.button_survey_example_3);
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 i_survey.putExtra("json_survey", loadSurveyJson("example_survey_3.json"));
                 startActivityForResult(i_survey, SURVEY_REQUEST);
             }
-        });
+        });*/
 
     }
 
@@ -88,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 String answers_json = data.getExtras().getString("answers");
+                String form_id = data.getExtras().getString("form_id");
                 Log.d("****", "****************** WE HAVE ANSWERS ******************");
+                Log.v("Form Id", form_id);
                 Log.v("ANSWERS JSON", answers_json);
                 Log.d("****", "*****************************************************");
 

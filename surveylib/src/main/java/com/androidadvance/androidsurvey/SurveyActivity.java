@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class SurveyActivity extends AppCompatActivity {
 
     private SurveyPojo mSurveyPojo;
+    private String formId;
     private ViewPager mPager;
     private String style_string = null;
 
@@ -38,6 +39,7 @@ public class SurveyActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
+            formId = bundle.getString("form_id");
             if (bundle.containsKey("style")) {
                 style_string = bundle.getString("style");
             }
@@ -141,6 +143,7 @@ public class SurveyActivity extends AppCompatActivity {
     public void event_survey_completed(Answers instance) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("answers", instance.get_json_object());
+        returnIntent.putExtra("form_id", formId);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
