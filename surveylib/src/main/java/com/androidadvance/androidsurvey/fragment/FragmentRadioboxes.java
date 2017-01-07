@@ -56,18 +56,25 @@ public class FragmentRadioboxes extends Fragment {
 
     private void collect_data() {
 
+        Question question = (Question) getArguments().getSerializable("data");
+
         //----- collection & validation for is_required
         String the_choice = "";
+        List<Integer> choice_indexes = new ArrayList<Integer>();
+
         at_leaset_one_checked = false;
+        int counter = 0;
         for (RadioButton rb : allRb) {
             if (rb.isChecked()) {
                 at_leaset_one_checked = true;
                 the_choice = rb.getText().toString();
+                choice_indexes.add(counter);
             }
+            counter++;
         }
 
         if (the_choice.length() > 0) {
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
+            Answers.getInstance().put_answer(question, the_choice, choice_indexes);
         }
 
 

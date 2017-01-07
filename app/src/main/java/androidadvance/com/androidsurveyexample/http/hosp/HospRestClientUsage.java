@@ -78,6 +78,9 @@ public class HospRestClientUsage {
         params.put("body", response.getAnswers());
         params.put("Timestamp", response.getTimestamp());
 
+        params.put("Score", response.getScore());
+        params.put("Sentiment", response.getSentiment());
+
         params.put("DeviceId", Config.getInstance().getDevice().getId());
         params.put("DeviceType", Config.getInstance().getDevice().getType());
         params.put("DeviceModel", Config.getInstance().getDevice().getModel());

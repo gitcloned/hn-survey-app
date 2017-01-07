@@ -37,6 +37,18 @@ public class Question implements Serializable {
     @SerializedName("number_of_lines")
     @Expose
     private Integer numberOfLines;
+    @SerializedName("question_id")
+    @Expose
+    private String questionId;
+    @SerializedName("score_enabled")
+    @Expose
+    private Boolean scoreEnabled;
+    @SerializedName("score_weight")
+    @Expose
+    private Double scoreWeight;
+    @SerializedName("scores")
+    @Expose
+    private List<Integer> scores = new ArrayList<Integer>();
 
     /**
      *
@@ -200,4 +212,35 @@ public class Question implements Serializable {
         this.numberOfLines = numberOfLines;
     }
 
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public Boolean getScoreEnabled() {
+        return scoreEnabled;
+    }
+
+    public void setScoreEnabled(Boolean scoreEnabled) {
+        this.scoreEnabled = scoreEnabled;
+    }
+
+    public Double getScoreWeight() {
+        return scoreWeight;
+    }
+
+    public void setScoreWeight(Double scoreWeight) {
+        this.scoreWeight = scoreWeight;
+    }
+
+    public List<Integer> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Integer> scores) {
+        this.scores = scores;
+    }
 }

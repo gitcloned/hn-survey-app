@@ -141,8 +141,26 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     public void event_survey_completed(Answers instance) {
+
+        Double maxScore = mSurveyPojo.getSurveyProperties().getMaxScore();
+        Double score = instance.getScore();
+        Double sentiment = 0.0;
+
+        if (maxScore != null && maxScore > 0) {
+
+            if (score > maxScore) sentiment = 1.0;
+            else if (score == 0) sentiment = 0.0;
+            else {
+
+                double mid = maxScore / 2;
+                sentiment = (score - mid) / mid;
+            }
+        }
+
         Intent returnIntent = new Intent();
         returnIntent.putExtra("answers", instance.get_json_object());
+        returnIntent.putExtra("score", score);
+        returnIntent.putExtra("sentiment", sentiment);
         returnIntent.putExtra("form_id", formId);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();

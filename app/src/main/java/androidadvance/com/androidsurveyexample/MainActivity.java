@@ -100,15 +100,19 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 String answers_json = data.getExtras().getString("answers");
+                Double score = data.getExtras().getDouble("score");
+                Double sentiment = data.getExtras().getDouble("sentiment");
                 String form_id = data.getExtras().getString("form_id");
                 String responseId = UUID.randomUUID().toString();
 
                 Log.d("****", "****************** WE HAVE ANSWERS ******************");
                 Log.v("Form Id", form_id);
                 Log.v("ANSWERS JSON", answers_json);
+                Log.v("Score", score.toString());
+                Log.v("Sentiment", sentiment.toString());
                 Log.d("****", "*****************************************************");
 
-                FormResponse formResponse = new FormResponse(responseId, form_id, answers_json);
+                FormResponse formResponse = new FormResponse(responseId, form_id, answers_json, score, sentiment);
 
                 FormResponseListener listener = new FormResponseListener(this) {
                     @Override

@@ -19,6 +19,9 @@ public class SurveyProperties implements Serializable {
     @SerializedName("skip_intro")
     @Expose
     private Boolean skipIntro;
+    @SerializedName("max_score")
+    @Expose
+    private Double maxScore;
 
     /**
      * @return The title
@@ -76,4 +79,11 @@ public class SurveyProperties implements Serializable {
         this.skipIntro = skipIntro;
     }
 
+    public Double getMaxScore() {
+        return maxScore;
+    }
+
+    public void setMaxScore(Double maxScore) {
+        this.maxScore = maxScore;
+    }
 }

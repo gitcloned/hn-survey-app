@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
         android:theme="@style/AppTheme" >
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity"
+            android:label="Forms" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

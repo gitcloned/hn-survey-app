@@ -53,19 +53,27 @@ public class FragmentCheckboxes extends Fragment {
 
     private void collect_data() {
 
+        Question question = (Question) getArguments().getSerializable("data");
+
         //----- collection & validation for is_required
         String the_choices = "";
+        List<Integer> choice_indexes = new ArrayList<Integer>();
+
         boolean at_leaset_one_checked = false;
+        int counter = 0;
         for (CheckBox cb : allCb) {
             if (cb.isChecked()) {
                 at_leaset_one_checked = true;
                 the_choices = the_choices + cb.getText().toString() + ", ";
+                choice_indexes.add(counter);
             }
+            counter++;
         }
 
         if (the_choices.length() > 2) {
             the_choices = the_choices.substring(0, the_choices.length() - 2);
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choices);
+//            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choices);
+            Answers.getInstance().put_answer(question, the_choices, choice_indexes);
         }
 
 
