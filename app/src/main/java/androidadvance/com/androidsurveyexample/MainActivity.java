@@ -10,15 +10,26 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.androidadvance.androidsurvey.SurveyActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 import androidadvance.com.androidsurveyexample.forms.FormListAdapter;
+import androidadvance.com.androidsurveyexample.http.hosp.Device;
+import androidadvance.com.androidsurveyexample.http.hosp.HospRestClientUsage;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.Form;
+import androidadvance.com.androidsurveyexample.http.hosp.resp.FormResponse;
+import androidadvance.com.androidsurveyexample.http.hosp.resp.listeners.FormResponseListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int SURVEY_REQUEST = 1337;
+    private static final String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +101,34 @@ public class MainActivity extends AppCompatActivity {
 
                 String answers_json = data.getExtras().getString("answers");
                 String form_id = data.getExtras().getString("form_id");
+                String responseId = UUID.randomUUID().toString();
+
                 Log.d("****", "****************** WE HAVE ANSWERS ******************");
                 Log.v("Form Id", form_id);
                 Log.v("ANSWERS JSON", answers_json);
                 Log.d("****", "*****************************************************");
 
-                //do whatever you want with them...
+                FormResponse formResponse = new FormResponse(responseId, form_id, answers_json);
+
+                FormResponseListener listener = new FormResponseListener(this) {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.v(TAG, "Successfully saved response");
+                    }
+
+                    @Override
+                    public void onError(int statusCode, String error) {
+                        Log.v(TAG, "Error occurred while saving response");
+                    }
+                };
+
+                try {
+                    new HospRestClientUsage().storeResponse(listener, getApplicationContext(), formResponse);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import org.json.JSONException;
 
+import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.HospRestClientUsage;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
-import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponseListener;
+import androidadvance.com.androidsurveyexample.http.hosp.resp.listeners.SummaryResponseListener;
 
 public class SplashActivity extends Activity {
 
@@ -19,6 +21,10 @@ public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        Config.getInstance().setDevice(new Device(deviceId));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
 
@@ -39,7 +45,7 @@ public class SplashActivity extends Activity {
             }
 
             @Override
-            public void onError(String error) {
+            public void onError(int statusCode, String error) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(null);
                 builder.setTitle("ERROR !!");

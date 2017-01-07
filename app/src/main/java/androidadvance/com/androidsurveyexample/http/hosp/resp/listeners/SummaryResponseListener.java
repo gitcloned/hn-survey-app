@@ -1,6 +1,8 @@
-package androidadvance.com.androidsurveyexample.http.hosp.resp;
+package androidadvance.com.androidsurveyexample.http.hosp.resp.listeners;
 
 import android.app.Activity;
+
+import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
 
 /**
  * Created by asjain on 1/2/2017.
@@ -20,5 +22,5 @@ public abstract class SummaryResponseListener {
 
     public abstract void onResponse(SummaryResponse response);
 
-    public abstract void onError(String error);
+    public abstract void onError(int statusCode, String errorResponse);
 }

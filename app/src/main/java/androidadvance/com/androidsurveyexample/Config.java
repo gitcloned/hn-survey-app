@@ -1,5 +1,6 @@
 package androidadvance.com.androidsurveyexample;
 
+import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
 
 /**
@@ -20,9 +21,20 @@ public class Config {
 
     // Global variable
     private SummaryResponse summaryResponse;
+    private Device device;
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
 
     // Restrict the constructor from being instantiated
-    private Config(){}
+    private Config(){
+
+    }
 
     public static synchronized Config getInstance(){
         if(instance==null){
@@ -30,6 +42,5 @@ public class Config {
         }
         return instance;
     }
-
 
 }
