@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
 
+                /*
                 try {
                     new HospRestClientUsage().storeResponse(listener, getApplicationContext(), formResponse);
                 } catch (JSONException e) {
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                */
             }
         }
     }
