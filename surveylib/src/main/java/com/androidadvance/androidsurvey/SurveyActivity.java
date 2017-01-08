@@ -1,5 +1,6 @@
 package com.androidadvance.androidsurvey;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,12 +35,14 @@ public class SurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_survey);
 
-
-
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
             formId = bundle.getString("form_id");
+
+            ActionBar ab = getActionBar();
+            ab.setTitle(bundle.getString("form_title"));
+
             if (bundle.containsKey("style")) {
                 style_string = bundle.getString("style");
             }

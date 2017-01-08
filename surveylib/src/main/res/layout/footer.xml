@@ -10,7 +10,7 @@
         android:text="@string/xcontinue"
         android:id="@+id/button_continue"
         android:layout_gravity="center_horizontal"
-        android:background="#669900"
-        android:textColor="#FFF"
+        android:background="@color/primary"
+        android:textColor="@color/textColorPrimary"
         android:textSize="16sp" />
 </LinearLayout>

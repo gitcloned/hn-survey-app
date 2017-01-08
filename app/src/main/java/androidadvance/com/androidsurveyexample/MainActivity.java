@@ -1,5 +1,6 @@
 package androidadvance.com.androidsurveyexample;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //you have to pass as an extra the json string.
                 i_survey.putExtra("json_survey", form.getFormContent());
                 i_survey.putExtra("form_id", form.getId());
+                i_survey.putExtra("form_title", form.getName());
 
                 Log.d("****", "****************** Got Form Content ******************");
                 Log.v("Form Content", form.getFormContent());

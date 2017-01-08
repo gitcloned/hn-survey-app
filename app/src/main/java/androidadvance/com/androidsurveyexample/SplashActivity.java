@@ -31,8 +31,11 @@ public class SplashActivity extends Activity {
         String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Config.getInstance().setDevice(new Device(deviceId));
 
+        getActionBar().hide();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
+
 
         /*
         SummaryResponseListener listener = new SummaryResponseListener(this) {
