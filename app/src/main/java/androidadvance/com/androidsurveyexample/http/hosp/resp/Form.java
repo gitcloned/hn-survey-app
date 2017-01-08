@@ -1,15 +1,36 @@
 package androidadvance.com.androidsurveyexample.http.hosp.resp;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONObject;
+
+import java.io.Serializable;
+
+import androidadvance.com.androidsurveyexample.http.hosp.resp.pojo.SurveyPojo;
 
 /**
  * Created by asjain on 1/2/2017.
  */
 
-public class Form {
+public class Form  implements Serializable {
 
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("client")
+    @Expose
+    private String client;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("form")
+    @Expose
+    private SurveyPojo formJSON;
 
     public String getName() {
         return name;
@@ -19,8 +40,6 @@ public class Form {
         return description;
     }
 
-    private String description;
-
     public String getId() {
         return id;
     }
@@ -29,12 +48,9 @@ public class Form {
         return client;
     }
 
-    public JSONObject getFormJSON() {
+    public SurveyPojo getFormJSON() {
         return formJSON;
     }
-
-    private String client;
-    private JSONObject formJSON;
 
     public Form(String id, String name, String description, String client, JSONObject formJSON) {
 
@@ -42,11 +58,16 @@ public class Form {
         this.client = client;
         this.name = name;
         this.description = description;
-        this.formJSON = formJSON;
+        //this.formJSON = formJSON;
+    }
+
+    public Form() {
+
     }
 
     public String getFormContent() {
 
-        return this.formJSON.toString();
+        Gson gson = new Gson();
+        return gson.toJson(formJSON,SurveyPojo.class).toString();
     }
 }

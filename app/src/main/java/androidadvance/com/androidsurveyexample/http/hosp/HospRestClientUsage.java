@@ -27,7 +27,7 @@ public class HospRestClientUsage {
 
     public void getSummary(final SummaryResponseListener listener) throws JSONException {
 
-        HospRestClient.get("hospital_summary", null, new JsonHttpResponseHandler() {
+        HospRestClient.getInstance().get("hospital_summary", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
@@ -86,7 +86,7 @@ public class HospRestClientUsage {
         params.put("DeviceModel", Config.getInstance().getDevice().getModel());
         params.put("DeviceOS", Config.getInstance().getDevice().getOsVersion());
 
-        HospRestClient.postJSON("hospital_summary", context, params, new JsonHttpResponseHandler() {
+        HospRestClient.getInstance().postJSON("hospital_summary", context, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 

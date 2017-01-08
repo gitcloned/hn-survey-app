@@ -5,9 +5,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.HospRestClientUsage;
@@ -28,6 +34,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
 
+        /*
         SummaryResponseListener listener = new SummaryResponseListener(this) {
 
             @Override
@@ -72,13 +79,14 @@ public class SplashActivity extends Activity {
 
 
         }
+        */
 
-        /*new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
 
-            *//*
+            /*
              * Showing splash screen with a timer. This will be useful when you
              * want to show case your app logo / company
-             *//*
+             */
 
             @Override
             public void run() {
@@ -87,9 +95,27 @@ public class SplashActivity extends Activity {
                 Intent i = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(i);
 
+                SummaryResponse response = new Gson().fromJson(loadSurveyJson("hospital_summary.json"), SummaryResponse.class);
+
+                Config.getInstance().setSummaryResponse(response);
+
                 // close this activity
                 finish();
             }
-        }, SPLASH_TIME_OUT);*/
+
+            private String loadSurveyJson(String filename) {
+                try {
+                    InputStream is = getAssets().open(filename);
+                    int size = is.available();
+                    byte[] buffer = new byte[size];
+                    is.read(buffer);
+                    is.close();
+                    return new String(buffer, "UTF-8");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+            }
+        }, SPLASH_TIME_OUT);
     }
 }

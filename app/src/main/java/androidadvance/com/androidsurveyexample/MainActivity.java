@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 //you have to pass as an extra the json string.
                 i_survey.putExtra("json_survey", form.getFormContent());
                 i_survey.putExtra("form_id", form.getId());
+
+                Log.d("****", "****************** Got Form Content ******************");
+                Log.v("Form Content", form.getFormContent());
+
                 startActivityForResult(i_survey, SURVEY_REQUEST);
             }
         });
