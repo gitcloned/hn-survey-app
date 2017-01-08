@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="fill_vertical|fill_horizontal"
-        android:src="@mipmap/screen_portrait" />
+        android:src="@mipmap/splash_sppc" />
 
     <TextView
         android:layout_width="fill_parent"

@@ -35,6 +35,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:gravity="top|left"
+                android:textColor="#333"
                 android:lines="3" />
         </LinearLayout>
 
