@@ -112,7 +112,7 @@ public class FragmentCheckboxes extends Fragment {
         for (String choice : qq_data) {
             CheckBox cb = new CheckBox(mContext);
             cb.setText(Html.fromHtml(choice));
-            cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout_checkboxes.addView(cb);
             allCb.add(cb);

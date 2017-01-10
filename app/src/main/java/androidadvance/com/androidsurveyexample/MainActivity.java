@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         ListView formItems = (ListView)
                 findViewById(R.id.listOfForms);
 
+        if (Config.getInstance().getSummaryResponse() != null)
         formItems.setAdapter(new FormListAdapter
                 (MainActivity.this, Config.getInstance().getSummaryResponse().getForms()));
 

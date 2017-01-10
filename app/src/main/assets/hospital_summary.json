@@ -162,43 +162,132 @@
         },
         "questions": [
           {
-            "question_type": "Checkboxes",
-            "question_title": "What were you hoping the XYZ mobile app would do?",
-            "description": "(Select all that apply)",
-            "required": false,
+            "question_id": "Q00001",
+            "question_type": "Radioboxes",
+            "question_title": "In general how would you rate your overall health experience?",
+            "description": "",
+            "required": true,
             "random_choices": false,
             "choices": [
-              "thing #1",
-              "thing #2",
-              "thing #3",
-              "thing #4"
-            ]
+              "Excellent",
+              "Very Good",
+              "Good",
+              "Fair",
+              "Poor"
+            ],
+            "score_enabled": true,
+            "scores": [
+              5,
+              4,
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
           },
           {
-            "question_type": "Checkboxes",
-            "question_title": "Do you currently use one of these other software solutions?",
+            "question_id": "Q00002",
+            "question_type": "Radioboxes",
+            "question_title": "During your visit, did your healthcare provider listen carefully to you and provided enough time?",
             "description": "",
-            "required": false,
+            "required": true,
             "random_choices": true,
             "choices": [
-              "<font color='#AA0000'>Yes, I use a <strong>red</strong> product</font>",
-              "I use a <font color='#00AA00'>green product</font>",
-              "I partialy use a <font color='#0000AA'><strong>blue</strong></font> product"
-            ]
+              "Yes, definitely",
+              "Yes, somewhat",
+              "No"
+            ],
+            "score_enabled": true,
+            "scores": [
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
           },
           {
-            "question_type": "String",
-            "question_title": "Why did you not subscribe at the end of your free trial ?",
+            "question_id": "Q00003",
+            "question_type": "Radioboxes",
+            "question_title": "During your visit, did the operational staff (reception, clerks) were as helpful as you thought they should be?",
             "description": "",
-            "required": false
+            "required": true,
+            "choices": [
+              "Yes, definitely",
+              "Yes, somewhat",
+              "No"
+            ],
+            "score_enabled": true,
+            "scores": [
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
           },
           {
-            "question_title": "If this app was paid, how much you would give to have it ?",
+            "question_id": "Q00004",
+            "question_title": "How would rate the overall hospital facility and infrastructure?",
+            "description": "",
+            "question_type": "Radioboxes",
+            "required": true,
+            "random_choices": false,
+            "choices": [
+              "Excellent",
+              "Very Good",
+              "Good",
+              "Fair",
+              "Poor"
+            ],
+            "score_enabled": true,
+            "scores": [
+              5,
+              4,
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
+          },
+          {
+            "question_id": "Q00005",
+            "question_type": "Radioboxes",
+            "question_title": "How likely are you to recommend us to others when they need a medical help?",
             "description": "",
             "required": false,
-            "question_type": "Number"
+            "choices": [
+              "Yes, definitely",
+              "Yes, maybe",
+              "Not at all"
+            ],
+            "score_enabled": true,
+            "scores": [
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
           },
           {
+            "question_id": "Q00006",
+            "question_type": "Checkboxes",
+            "question_title": "How likely are you to recommend us to others when they need a medical help?",
+            "description": "",
+            "required": false,
+            "choices": [
+              "Yes, definitely",
+              "Yes, maybe",
+              "Not at all"
+            ],
+            "score_enabled": true,
+            "scores": [
+              3,
+              2,
+              1
+            ],
+            "score_weight": 1
+          },
+          {
+            "question_id": "Q00007",
             "question_type": "StringMultiline",
             "question_title": "We love feedback and if there is anything else youâ€™d like us to improve please let us know.",
             "description": "",

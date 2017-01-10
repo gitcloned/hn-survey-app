@@ -108,7 +108,7 @@ public class FragmentRadioboxes extends Fragment {
         for (String choice : qq_data) {
             RadioButton rb = new RadioButton(mContext);
             rb.setText(Html.fromHtml(choice));
-            rb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            rb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             rb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             radioGroup.addView(rb);
             allRb.add(rb);
