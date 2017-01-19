@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
                 Double score = data.getExtras().getDouble("score");
                 Double sentiment = data.getExtras().getDouble("sentiment");
                 String form_id = data.getExtras().getString("form_id");
+                String user_name = data.getExtras().getString("user_name");
+                String user_contact = data.getExtras().getString("user_contact");
                 final String responseId = UUID.randomUUID().toString();
 
                 Log.d("****", "****************** WE HAVE ANSWERS ******************");
@@ -193,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
                 responseRequest.setScore(score);
                 responseRequest.setClientId(Config.getInstance().getClientId());
 
-                responseRequest.setUserName("Ramesh Jain");
-                responseRequest.setUserContact("8787878787");
+                responseRequest.setUserName(user_name);
+                responseRequest.setUserContact(user_contact);
 
                 responseRequest.setDeviceId(Config.getInstance().getDevice().getId());
                 responseRequest.setDeviceModel(Config.getInstance().getDevice().getModel());

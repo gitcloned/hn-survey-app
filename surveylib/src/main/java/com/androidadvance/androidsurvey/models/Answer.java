@@ -21,6 +21,9 @@ public class Answer implements Serializable {
     @Expose
     private Double score;
 
+
+
+
     /*@SerializedName("ScoreSentiment")
     @Expose
     private Double scoreSentiment;*/

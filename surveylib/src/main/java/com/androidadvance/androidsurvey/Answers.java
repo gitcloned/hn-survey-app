@@ -24,6 +24,25 @@ public class Answers {
 
     private List<Answer> answers = new ArrayList<Answer>();
 
+    private String UserName;
+    private String UserContact;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public String getUserContact() {
+        return UserContact;
+    }
+
+    public void setUserContact(String userContact) {
+        UserContact = userContact;
+    }
+
     private Answers() {
     }
 

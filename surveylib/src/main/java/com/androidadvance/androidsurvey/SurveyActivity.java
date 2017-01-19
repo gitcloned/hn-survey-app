@@ -17,6 +17,7 @@ import com.androidadvance.androidsurvey.fragment.FragmentNumber;
 import com.androidadvance.androidsurvey.fragment.FragmentRadioboxes;
 import com.androidadvance.androidsurvey.fragment.FragmentStart;
 import com.androidadvance.androidsurvey.fragment.FragmentTextSimple;
+import com.androidadvance.androidsurvey.fragment.FragmentUserInfo;
 import com.androidadvance.androidsurvey.models.Question;
 import com.androidadvance.androidsurvey.models.SurveyPojo;
 import com.google.gson.Gson;
@@ -65,6 +66,12 @@ public class SurveyActivity extends AppCompatActivity {
             frag_start.setArguments(sBundle);
             arraylist_fragments.add(frag_start);
         }
+
+        FragmentUserInfo frag_userInfo = new FragmentUserInfo();
+        Bundle fuBundle = new Bundle();
+        fuBundle.putString("style", style_string);
+        frag_userInfo.setArguments(fuBundle);
+        arraylist_fragments.add(frag_userInfo);
 
         //- FILL -
         for (Question mQuestion : mSurveyPojo.getQuestions()) {
@@ -170,6 +177,8 @@ public class SurveyActivity extends AppCompatActivity {
         returnIntent.putExtra("score", score);
         returnIntent.putExtra("sentiment", sentiment);
         returnIntent.putExtra("form_id", formId);
+        returnIntent.putExtra("user_name", instance.getUserName());
+        returnIntent.putExtra("user_contact", instance.getUserContact());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
