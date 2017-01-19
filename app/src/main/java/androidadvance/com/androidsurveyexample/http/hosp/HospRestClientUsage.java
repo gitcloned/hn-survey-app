@@ -53,7 +53,7 @@ public class HospRestClientUsage {
                                         formJSON.getString("name"),
                                         formJSON.getString("description"),
                                         formJSON.getString("client"),
-                                        formJSON.getJSONObject("form"));
+                                        null);
                                 summaryResponse.addForm(form);
                             }
                         }

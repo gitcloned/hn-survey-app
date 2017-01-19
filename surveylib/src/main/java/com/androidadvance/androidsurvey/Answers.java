@@ -53,10 +53,10 @@ public class Answers {
 
         List<Integer> scores = question.getScores();
 
-        Log.v(" <<< " + question.getQuestionId() + ": ", Arrays.toString(scores.toArray()));
+        /*Log.v(" <<< " + question.getQuestionId() + ": ", Arrays.toString(scores.toArray()));
         Log.v(" <<< " + question.getQuestionId() + ", score enabled: ", question.getScoreEnabled().toString());
         Log.v(" <<< " + question.getQuestionId() + ", choices: ", Arrays.toString(choice_indexes.toArray()));
-        Log.v(" <<< " + question.getQuestionId() + ", weight: ", question.getScoreWeight().toString());
+        Log.v(" <<< " + question.getQuestionId() + ", weight: ", question.getScoreWeight().toString());*/
 
         answer.setQuestion(question.getQuestionId());
         answer.setResponse(value);

@@ -19,7 +19,7 @@ public class Question implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("required")
+    @SerializedName("question_required")
     @Expose
     private Boolean required;
     @SerializedName("random_choices")

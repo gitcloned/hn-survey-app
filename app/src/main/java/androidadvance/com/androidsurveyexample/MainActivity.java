@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.androidadvance.androidsurvey.SurveyActivity;
 
@@ -20,6 +21,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
+import androidadvance.com.androidsurveyexample.aws.lambda.hosp.responses.HospResponseAPI;
+import androidadvance.com.androidsurveyexample.aws.lambda.hosp.responses.payload.ResponseRequest;
+import androidadvance.com.androidsurveyexample.aws.lambda.hosp.responses.payload.listener.ResponseSaveListener;
 import androidadvance.com.androidsurveyexample.forms.FormListAdapter;
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.HospRestClientUsage;
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 Double score = data.getExtras().getDouble("score");
                 Double sentiment = data.getExtras().getDouble("sentiment");
                 String form_id = data.getExtras().getString("form_id");
-                String responseId = UUID.randomUUID().toString();
+                final String responseId = UUID.randomUUID().toString();
 
                 Log.d("****", "****************** WE HAVE ANSWERS ******************");
                 Log.v("Form Id", form_id);
@@ -119,6 +123,43 @@ public class MainActivity extends AppCompatActivity {
                 Log.v("Sentiment", sentiment.toString());
                 Log.d("****", "*****************************************************");
 
+                HospResponseAPI hospResponseAPI = new HospResponseAPI(getApplicationContext());
+                ResponseRequest responseRequest = new ResponseRequest();
+
+                responseRequest.setFormId(form_id);
+                responseRequest.setBody(answers_json);
+                responseRequest.setScore(score);
+                responseRequest.setClientId(Config.getInstance().getClientId());
+
+                responseRequest.setUserName("Ramesh Jain");
+                responseRequest.setUserContact("8787878787");
+
+                responseRequest.setDeviceId(Config.getInstance().getDevice().getId());
+                responseRequest.setDeviceModel(Config.getInstance().getDevice().getModel());
+                responseRequest.setDeviceOS(Config.getInstance().getDevice().getOsVersion());
+                responseRequest.setDeviceType(Config.getInstance().getDevice().getType());
+
+                Log.i(TAG, "Storing response for form: " + responseRequest.getBody());
+
+                hospResponseAPI.storeResponse(responseRequest, new ResponseSaveListener(getApplicationContext()) {
+                    @Override
+                    public void onResponse(Object response) {
+
+                        Log.i(TAG, "Got resp: " + response.toString());
+
+                        Toast.makeText(this.getContext(),
+                                "Response captured", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(int statusCode, String errorResponse) {
+
+                        Toast.makeText(this.getContext(),
+                                "Some error occurred while storing response", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                /*
                 FormResponse formResponse = new FormResponse(responseId, form_id, answers_json, score, sentiment);
 
                 FormResponseListener listener = new FormResponseListener(this) {

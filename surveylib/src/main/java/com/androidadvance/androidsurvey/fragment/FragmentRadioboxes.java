@@ -101,6 +101,7 @@ public class FragmentRadioboxes extends Fragment {
 
 
         List<String> qq_data = q_data.getChoices();
+
         /*if (q_data.getRandomChoices()) {
             Collections.shuffle(qq_data);
         }*/

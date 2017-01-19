@@ -28,9 +28,6 @@ public class Form  implements Serializable {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("form")
-    @Expose
-    private SurveyPojo formJSON;
 
     public String getName() {
         return name;
@@ -48,17 +45,19 @@ public class Form  implements Serializable {
         return client;
     }
 
-    public SurveyPojo getFormJSON() {
+    public String getFormJSON() {
         return formJSON;
     }
 
-    public Form(String id, String name, String description, String client, JSONObject formJSON) {
+    private String formJSON;
+
+    public Form(String id, String name, String description, String client, String formJSON) {
 
         this.id = id;
         this.client = client;
         this.name = name;
         this.description = description;
-        //this.formJSON = formJSON;
+        this.formJSON = formJSON;
     }
 
     public Form() {
@@ -67,7 +66,6 @@ public class Form  implements Serializable {
 
     public String getFormContent() {
 
-        Gson gson = new Gson();
-        return gson.toJson(formJSON,SurveyPojo.class).toString();
+        return formJSON;
     }
 }

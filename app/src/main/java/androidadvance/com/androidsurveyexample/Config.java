@@ -1,5 +1,8 @@
 package androidadvance.com.androidsurveyexample;
 
+import java.util.ArrayList;
+
+import androidadvance.com.androidsurveyexample.aws.lambda.hosp.forms.HospitalForm;
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
 
@@ -10,6 +13,11 @@ import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
 public class Config {
 
     private static Config instance;
+    private String ClientId = "SPPC";
+
+    public String getClientId() {
+        return ClientId;
+    }
 
     public SummaryResponse getSummaryResponse() {
         return summaryResponse;
@@ -19,9 +27,18 @@ public class Config {
         this.summaryResponse = summaryResponse;
     }
 
+    public ArrayList<HospitalForm> getHospitalForms() {
+        return hospitalForms;
+    }
+
+    public void setHospitalForms(ArrayList<HospitalForm> hospitalForms) {
+        this.hospitalForms = hospitalForms;
+    }
+
     // Global variable
     private SummaryResponse summaryResponse;
     private Device device;
+    private ArrayList<HospitalForm> hospitalForms;
 
     public Device getDevice() {
         return device;
