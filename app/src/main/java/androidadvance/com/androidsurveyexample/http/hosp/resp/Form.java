@@ -51,13 +51,16 @@ public class Form  implements Serializable {
 
     private String formJSON;
 
-    public Form(String id, String name, String description, String client, String formJSON) {
+    private String password;
+
+    public Form(String id, String name, String description, String client, String formJSON, String password) {
 
         this.id = id;
         this.client = client;
         this.name = name;
         this.description = description;
         this.formJSON = formJSON;
+        this.password = password;
     }
 
     public Form() {
@@ -67,5 +70,9 @@ public class Form  implements Serializable {
     public String getFormContent() {
 
         return formJSON;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

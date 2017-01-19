@@ -105,6 +105,8 @@ public class SplashActivity extends Activity {
                             treeMap.get("Description") : "";
                     String form = treeMap.containsKey("form") ?
                             treeMap.get("form") : null;
+                    String password = treeMap.containsKey("Password") ?
+                            treeMap.get("Password") : null;
 
                     JSONObject formJSon = null;
 
@@ -119,7 +121,7 @@ public class SplashActivity extends Activity {
 
                     if(Description == null) Description = "";
 
-                    Form nForm = new Form(FormId, Name, Description, "SPPC", form);
+                    Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
                     summaryResponse.addForm(nForm);
                 }
                 /*

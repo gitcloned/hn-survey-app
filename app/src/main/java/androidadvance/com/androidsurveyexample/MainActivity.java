@@ -1,13 +1,17 @@
 package androidadvance.com.androidsurveyexample;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
     private static final int SURVEY_REQUEST = 1337;
     private static final String TAG = "Main";
 
+    private void initiateForm(Form form) {
+
+        Intent i_survey = new Intent(MainActivity.this, SurveyActivity.class);
+        //you have to pass as an extra the json string.
+        i_survey.putExtra("json_survey", form.getFormContent());
+        i_survey.putExtra("form_id", form.getId());
+        i_survey.putExtra("form_title", form.getName());
+
+        Log.d("****", "****************** Got Form Content ******************");
+        Log.v("Form Content", form.getFormContent());
+
+        startActivityForResult(i_survey, SURVEY_REQUEST);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +70,62 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value;
 
-                Form form = (Form) parent.getItemAtPosition(position);
+                final Form form = (Form) parent.getItemAtPosition(position);
 
-                Intent i_survey = new Intent(MainActivity.this, SurveyActivity.class);
-                //you have to pass as an extra the json string.
-                i_survey.putExtra("json_survey", form.getFormContent());
-                i_survey.putExtra("form_id", form.getId());
-                i_survey.putExtra("form_title", form.getName());
+                if (form.getPassword() != null && form.getPassword().trim().length() > 0) {
 
-                Log.d("****", "****************** Got Form Content ******************");
-                Log.v("Form Content", form.getFormContent());
+                    LayoutInflater li = LayoutInflater.from(MainActivity.this);
+                    View promptsView = li.inflate(R.layout.password_prompt, null);
 
-                startActivityForResult(i_survey, SURVEY_REQUEST);
+                    final String password = form.getPassword();
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            MainActivity.this, R.style.AlertFialogStyle);
+
+                    // set prompts.xml to alertdialog builder
+                    alertDialogBuilder.setView(promptsView);
+
+                    final EditText userInput = (EditText) promptsView
+                            .findViewById(R.id.editTextDialogUserInput);
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setTitle("Please enter password:")
+                            .setCancelable(false)
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            // get user input and set it to result
+                                            // edit text
+                                            if (userInput.getText().toString().equals(password)) {
+
+                                                MainActivity.this.initiateForm(form);
+                                            } else {
+
+                                                userInput.setText("");
+
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Invalid password, try again.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+                }
+                else
+                    MainActivity.this.initiateForm(form);
+
+
             }
         });
 
@@ -147,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.i(TAG, "Got resp: " + response.toString());
 
-                        Toast.makeText(this.getContext(),
-                                "Response captured", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this.getContext(),
+                        //        "Response captured", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
