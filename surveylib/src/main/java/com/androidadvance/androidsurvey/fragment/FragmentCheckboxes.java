@@ -102,9 +102,11 @@ public class FragmentCheckboxes extends Fragment {
         }
 
         List<String> qq_data = q_data.getChoices();
+        /*
         if (q_data.getRandomChoices()) {
             Collections.shuffle(qq_data);
         }
+        */
 
         for (String choice : qq_data) {
             CheckBox cb = new CheckBox(mContext);

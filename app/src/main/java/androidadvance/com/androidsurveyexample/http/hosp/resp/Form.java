@@ -29,14 +29,14 @@ public class Form {
         return client;
     }
 
-    public JSONObject getFormJSON() {
+    public String getFormJSON() {
         return formJSON;
     }
 
     private String client;
-    private JSONObject formJSON;
+    private String formJSON;
 
-    public Form(String id, String name, String description, String client, JSONObject formJSON) {
+    public Form(String id, String name, String description, String client, String formJSON) {
 
         this.id = id;
         this.client = client;

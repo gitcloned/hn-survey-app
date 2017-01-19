@@ -38,7 +38,10 @@ public class SurveyActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
+            Log.i("Survey", "Got form id: " + bundle.getString("form_id"));
+            Log.i("Survey", "Got pojo: " + bundle.getString("json_survey"));
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
+            Log.i("Survey", "Got pojo qs: " + mSurveyPojo.getQuestions().size());
             formId = bundle.getString("form_id");
             if (bundle.containsKey("style")) {
                 style_string = bundle.getString("style");
@@ -51,7 +54,7 @@ public class SurveyActivity extends AppCompatActivity {
         final ArrayList<Fragment> arraylist_fragments = new ArrayList<>();
 
         //- START -
-        if (!mSurveyPojo.getSurveyProperties().getSkipIntro()) {
+        if (mSurveyPojo.getSurveyProperties() != null || !mSurveyPojo.getSurveyProperties().getSkipIntro()) {
             FragmentStart frag_start = new FragmentStart();
             Bundle sBundle = new Bundle();
             sBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
@@ -62,6 +65,8 @@ public class SurveyActivity extends AppCompatActivity {
 
         //- FILL -
         for (Question mQuestion : mSurveyPojo.getQuestions()) {
+
+            Log.i("Survey", "pojo qs: " + mQuestion.getQuestionTitle());
 
             if (mQuestion.getQuestionType().equals("String")) {
                 FragmentTextSimple frag = new FragmentTextSimple();
