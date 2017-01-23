@@ -10,6 +10,9 @@ public class HospitalForm {
     private String Name;
     private String Description;
     private String form;
+    private String SMSN;
+    private String EmailN;
+    private double MaxScore;
 
     public HospitalForm() {
     }
@@ -51,5 +54,29 @@ public class HospitalForm {
 
     public void setForm(String form) {
         this.form = form;
+    }
+
+    public String getSMSN() {
+        return SMSN;
+    }
+
+    public void setSMSN(String SMSN) {
+        this.SMSN = SMSN;
+    }
+
+    public String getEmailN() {
+        return EmailN;
+    }
+
+    public void setEmailN(String emailN) {
+        EmailN = emailN;
+    }
+
+    public double getMaxScore() {
+        return MaxScore;
+    }
+
+    public void setMaxScore(double maxScore) {
+        MaxScore = maxScore;
     }
 }

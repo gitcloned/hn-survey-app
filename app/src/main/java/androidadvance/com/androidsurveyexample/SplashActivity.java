@@ -110,18 +110,32 @@ public class SplashActivity extends Activity {
 
                     JSONObject formJSon = null;
 
+                        /*
                     try {
                         formJSon = new JSONObject(form);
                     } catch (JSONException e) {
                         Log.i("Splash", "Parse error: " + e);
                         e.printStackTrace();
-                    }
+                    }*/
 
                     //Log.i("Splash", "Got result *************************** form: " + form);
 
                     if(Description == null) Description = "";
 
                     Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
+
+                    if (treeMap.containsKey("SMSN")) {
+                        nForm.setSMSN(treeMap.get("SMSN"));
+                    }
+
+                    if (treeMap.containsKey("EmailN")) {
+                        nForm.setEmailN(treeMap.get("EmailN"));
+                    }
+
+                    if (treeMap.containsKey("MaxScore")) {
+                        nForm.setMaxScore(treeMap.get("MaxScore"));
+                    }
+
                     summaryResponse.addForm(nForm);
                 }
                 /*

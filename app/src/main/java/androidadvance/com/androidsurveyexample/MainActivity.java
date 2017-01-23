@@ -187,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.v("Sentiment", sentiment.toString());
                 Log.d("****", "*****************************************************");
 
+                Form filledForm = Config.getInstance().getSummaryResponse().getForm(form_id);
+
                 HospResponseAPI hospResponseAPI = new HospResponseAPI(getApplicationContext());
                 ResponseRequest responseRequest = new ResponseRequest();
 
@@ -202,6 +204,19 @@ public class MainActivity extends AppCompatActivity {
                 responseRequest.setDeviceModel(Config.getInstance().getDevice().getModel());
                 responseRequest.setDeviceOS(Config.getInstance().getDevice().getOsVersion());
                 responseRequest.setDeviceType(Config.getInstance().getDevice().getType());
+
+                if (filledForm != null) {
+
+                    Log.v("Filled form sms", filledForm.getSMSN());
+
+                    if (filledForm.getSMSN() != null)
+                        responseRequest.setSMSN(filledForm.getSMSN());
+
+                    if (filledForm.getEmailN() != null)
+                        responseRequest.setEmailN(filledForm.getEmailN());
+
+                    responseRequest.setMaxScore(filledForm.getMaxScore());
+                }
 
                 Log.i(TAG, "Storing response for form: " + responseRequest.getBody());
 

@@ -80,10 +80,11 @@ public class Answers {
         answer.setQuestion(question.getQuestionId());
         answer.setResponse(value);
 
+        Double quesScore = 0.0;
+
         if (question.getScoreEnabled() && scores != null && scores.size() > 0 && choice_indexes.size() > 0) {
 
             Double weight = question.getScoreWeight();
-            Double quesScore = 0.0;
 
             if (weight == null || weight <= 0) weight = 1.0;
 
@@ -91,13 +92,14 @@ public class Answers {
 
                 if (index < scores.size()) {
 
-                    quesScore += scores.get(index) * weight;
+                    quesScore += scores.get(index);
                 }
             }
 
             answer.setScore(quesScore * weight);
 //            answer.setScoreSentiment(0.0);
 
+            Log.v(" <<< " + question.getQuestionId() + ", scores, choices: " +  scores.toString(), choice_indexes.toString() + " * " +weight);
             Log.v(" <<< " + question.getQuestionId() + ", score, sentiment: ", String.valueOf((quesScore * weight)));
 
         } else {

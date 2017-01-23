@@ -53,6 +53,10 @@ public class Form  implements Serializable {
 
     private String password;
 
+    private String SMSN;
+    private String EmailN;
+    private String MaxScore;
+
     public Form(String id, String name, String description, String client, String formJSON, String password) {
 
         this.id = id;
@@ -74,5 +78,29 @@ public class Form  implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getSMSN() {
+        return SMSN;
+    }
+
+    public void setSMSN(String SMSN) {
+        this.SMSN = SMSN;
+    }
+
+    public String getEmailN() {
+        return EmailN;
+    }
+
+    public void setEmailN(String emailN) {
+        EmailN = emailN;
+    }
+
+    public String getMaxScore() {
+        return MaxScore;
+    }
+
+    public void setMaxScore(String maxScore) {
+        MaxScore = maxScore;
     }
 }

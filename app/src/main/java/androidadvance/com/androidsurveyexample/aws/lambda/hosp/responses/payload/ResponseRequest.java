@@ -18,6 +18,9 @@ public class ResponseRequest {
     private String DeviceModel;
     private String DeviceOS;
     private double Score;
+    private String SMSN;
+    private String EmailN;
+    private String MaxScore;
 
     public ResponseRequest() {
     }
@@ -116,5 +119,29 @@ public class ResponseRequest {
 
     public void setScore(double score) {
         Score = score;
+    }
+
+    public String getSMSN() {
+        return SMSN;
+    }
+
+    public void setSMSN(String SMSN) {
+        this.SMSN = SMSN;
+    }
+
+    public String getEmailN() {
+        return EmailN;
+    }
+
+    public void setEmailN(String emailN) {
+        EmailN = emailN;
+    }
+
+    public String getMaxScore() {
+        return MaxScore;
+    }
+
+    public void setMaxScore(String maxScore) {
+        MaxScore = maxScore;
     }
 }
