@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         i_survey.putExtra("form_id", form.getId());
         i_survey.putExtra("form_title", form.getName());
 
-        Log.d("****", "****************** Got Form Content ******************");
-        Log.v("Form Content", form.getFormContent());
+        //Log.d("****", "****************** Got Form Content ******************");
+        //Log.v("Form Content", form.getFormContent());
 
         startActivityForResult(i_survey, SURVEY_REQUEST);
     }
@@ -180,12 +180,12 @@ public class MainActivity extends AppCompatActivity {
                 String user_contact = data.getExtras().getString("user_contact");
                 final String responseId = UUID.randomUUID().toString();
 
-                Log.d("****", "****************** WE HAVE ANSWERS ******************");
-                Log.v("Form Id", form_id);
-                Log.v("ANSWERS JSON", answers_json);
-                Log.v("Score", score.toString());
-                Log.v("Sentiment", sentiment.toString());
-                Log.d("****", "*****************************************************");
+                //Log.d("****", "****************** WE HAVE ANSWERS ******************");
+                //Log.v("Form Id", form_id);
+                //Log.v("ANSWERS JSON", answers_json);
+                //Log.v("Score", score.toString());
+                //Log.v("Sentiment", sentiment.toString());
+                //Log.d("****", "*****************************************************");
 
                 Form filledForm = Config.getInstance().getSummaryResponse().getForm(form_id);
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (filledForm != null) {
 
-                    Log.v("Filled form sms", filledForm.getSMSN());
+                    //Log.v("Filled form sms", filledForm.getSMSN());
 
                     if (filledForm.getSMSN() != null)
                         responseRequest.setSMSN(filledForm.getSMSN());
@@ -218,13 +218,13 @@ public class MainActivity extends AppCompatActivity {
                     responseRequest.setMaxScore(filledForm.getMaxScore());
                 }
 
-                Log.i(TAG, "Storing response for form: " + responseRequest.getBody());
+                //Log.i(TAG, "Storing response for form: " + responseRequest.getBody());
 
                 hospResponseAPI.storeResponse(responseRequest, new ResponseSaveListener(getApplicationContext()) {
                     @Override
                     public void onResponse(Object response) {
 
-                        Log.i(TAG, "Got resp: " + response.toString());
+                        //Log.i(TAG, "Got resp: " + response.toString());
 
                         //Toast.makeText(this.getContext(),
                         //        "Response captured", Toast.LENGTH_SHORT).show();

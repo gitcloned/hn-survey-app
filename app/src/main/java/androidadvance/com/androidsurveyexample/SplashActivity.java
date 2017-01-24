@@ -22,6 +22,8 @@ import androidadvance.com.androidsurveyexample.aws.lambda.hosp.forms.payload.lis
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.Form;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends Activity {
 
@@ -36,6 +38,7 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
+        Fabric.with(this, new Crashlytics());
 
         /*SummaryResponseListener listener = new SummaryResponseListener(this) {
 

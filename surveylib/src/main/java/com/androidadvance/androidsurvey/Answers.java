@@ -99,8 +99,8 @@ public class Answers {
             answer.setScore(quesScore * weight);
 //            answer.setScoreSentiment(0.0);
 
-            Log.v(" <<< " + question.getQuestionId() + ", scores, choices: " +  scores.toString(), choice_indexes.toString() + " * " +weight);
-            Log.v(" <<< " + question.getQuestionId() + ", score, sentiment: ", String.valueOf((quesScore * weight)));
+            //Log.v(" <<< " + question.getQuestionId() + ", scores, choices: " +  scores.toString(), choice_indexes.toString() + " * " +weight);
+            //Log.v(" <<< " + question.getQuestionId() + ", score, sentiment: ", String.valueOf((quesScore * weight)));
 
         } else {
 
