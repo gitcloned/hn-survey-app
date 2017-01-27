@@ -102,11 +102,14 @@ public class SplashActivity extends Activity {
                     String Name = treeMap.containsKey("Name") ?
                             treeMap.get("Name") : null;
                     String Description = treeMap.containsKey("Description") ?
-                            treeMap.get("Description") : "";
+                            treeMap.get("Description") : "Gather feedback";
                     String form = treeMap.containsKey("form") ?
                             treeMap.get("form") : null;
                     String password = treeMap.containsKey("Password") ?
                             treeMap.get("Password") : null;
+
+                    if (Description == null)
+                        Description = "Gather feedback";
 
                     JSONObject formJSon = null;
 
