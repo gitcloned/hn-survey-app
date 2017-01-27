@@ -8,8 +8,15 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.digits.sdk.android.AuthCallback;
+import com.digits.sdk.android.Digits;
+import com.digits.sdk.android.DigitsAuthButton;
+import com.digits.sdk.android.DigitsException;
+import com.digits.sdk.android.DigitsSession;
 import com.google.gson.internal.LinkedTreeMap;
 
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +34,11 @@ import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends Activity {
 
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "Cof6qTszd3KyOT4B8bjQwF2GQ";
+    private static final String TWITTER_SECRET = "wgWRtzB1gRfkZ5I7jFvzrqJ59A9EqtnPoKdScaBBYMcGcjVQtL";
+
+
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
 
@@ -38,7 +50,11 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
-        Fabric.with(this, new Crashlytics());
+
+        Digits.Builder digitsBuilder = new Digits.Builder().withTheme(R.style.CustomDigitsTheme);
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Crashlytics(), new TwitterCore(authConfig), digitsBuilder.build());
 
         /*SummaryResponseListener listener = new SummaryResponseListener(this) {
 
@@ -85,36 +101,55 @@ public class SplashActivity extends Activity {
 
         }*/
 
-        Log.i("Splash", "Getting result ***************************");
-        new HospFormsAPI(getApplicationContext()).getForms(new FormsResponseListener(getApplicationContext()) {
+        //DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
+        //digitsButton.setCallback(new AuthCallback() {
+        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
+        digitsButton.setText("Login");
+        digitsButton.setBackgroundColor(getResources().getColor(R.color.primary_dark));
+        digitsButton.setCallback(new AuthCallback() {
             @Override
-            public void onResponse(ArrayList<Object> response) {
+            public void success(DigitsSession session, String phoneNumber) {
+                // TODO: associate the session userID with your user model
+                Toast.makeText(getApplicationContext(), "Authentication successful for "
+                        + phoneNumber, Toast.LENGTH_LONG).show();
 
-                //Log.i("Splash", "Got result *************************** len: " + response.size());
-                //Log.i("Splash", "Got result *************************** len: " + response.toString());
-                //Log.i("Splash", "Got result *************************** len: " + response.getClass().getName());
-                //Log.i("Splash", "Got result *************************** len: " + response.get(0).getClass().getName());
+                // TODO: Use the current user's information
+                // You can call any combination of these three methods
+                Crashlytics.setUserIdentifier(session.getPhoneNumber());
+                Crashlytics.setUserEmail(session.getEmail().address);
+                Crashlytics.setUserName(session.getPhoneNumber());
 
-                SummaryResponse summaryResponse = new SummaryResponse();
 
-                for (int i=0; i<response.size(); i++) {
+                Log.i("Splash", "Getting result ***************************");
+                new HospFormsAPI(getApplicationContext()).getForms(new FormsResponseListener(getApplicationContext()) {
+                    @Override
+                    public void onResponse(ArrayList<Object> response) {
 
-                    LinkedTreeMap<String, String> treeMap = (LinkedTreeMap<String, String>)response.get(i);
-                    String FormId = treeMap.containsKey("FormId") ?
-                            treeMap.get("FormId") : null;
-                    String Name = treeMap.containsKey("Name") ?
-                            treeMap.get("Name") : null;
-                    String Description = treeMap.containsKey("Description") ?
-                            treeMap.get("Description") : "Gather feedback";
-                    String form = treeMap.containsKey("form") ?
-                            treeMap.get("form") : null;
-                    String password = treeMap.containsKey("Password") ?
-                            treeMap.get("Password") : null;
+                        //Log.i("Splash", "Got result *************************** len: " + response.size());
+                        //Log.i("Splash", "Got result *************************** len: " + response.toString());
+                        //Log.i("Splash", "Got result *************************** len: " + response.getClass().getName());
+                        //Log.i("Splash", "Got result *************************** len: " + response.get(0).getClass().getName());
 
-                    if (Description == null)
-                        Description = "Gather feedback";
+                        SummaryResponse summaryResponse = new SummaryResponse();
 
-                    JSONObject formJSon = null;
+                        for (int i=0; i<response.size(); i++) {
+
+                            LinkedTreeMap<String, String> treeMap = (LinkedTreeMap<String, String>)response.get(i);
+                            String FormId = treeMap.containsKey("FormId") ?
+                                    treeMap.get("FormId") : null;
+                            String Name = treeMap.containsKey("Name") ?
+                                    treeMap.get("Name") : null;
+                            String Description = treeMap.containsKey("Description") ?
+                                    treeMap.get("Description") : "Gather feedback";
+                            String form = treeMap.containsKey("form") ?
+                                    treeMap.get("form") : null;
+                            String password = treeMap.containsKey("Password") ?
+                                    treeMap.get("Password") : null;
+
+                            if (Description == null)
+                                Description = "Gather feedback";
+
+                            JSONObject formJSon = null;
 
                         /*
                     try {
@@ -124,26 +159,26 @@ public class SplashActivity extends Activity {
                         e.printStackTrace();
                     }*/
 
-                    //Log.i("Splash", "Got result *************************** form: " + form);
+                            //Log.i("Splash", "Got result *************************** form: " + form);
 
-                    if(Description == null) Description = "";
+                            if(Description == null) Description = "";
 
-                    Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
+                            Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
 
-                    if (treeMap.containsKey("SMSN")) {
-                        nForm.setSMSN(treeMap.get("SMSN"));
-                    }
+                            if (treeMap.containsKey("SMSN")) {
+                                nForm.setSMSN(treeMap.get("SMSN"));
+                            }
 
-                    if (treeMap.containsKey("EmailN")) {
-                        nForm.setEmailN(treeMap.get("EmailN"));
-                    }
+                            if (treeMap.containsKey("EmailN")) {
+                                nForm.setEmailN(treeMap.get("EmailN"));
+                            }
 
-                    if (treeMap.containsKey("MaxScore")) {
-                        nForm.setMaxScore(treeMap.get("MaxScore"));
-                    }
+                            if (treeMap.containsKey("MaxScore")) {
+                                nForm.setMaxScore(treeMap.get("MaxScore"));
+                            }
 
-                    summaryResponse.addForm(nForm);
-                }
+                            summaryResponse.addForm(nForm);
+                        }
                 /*
 
 
@@ -179,30 +214,39 @@ public class SplashActivity extends Activity {
 
                 Config.getInstance().setHospitalForms(response);
                 */
-                Config.getInstance().setSummaryResponse(summaryResponse);
+                        Config.getInstance().setSummaryResponse(summaryResponse);
 
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
+                        // This method will be executed once the timer is over
+                        // Start your app main activity
+                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(i);
 
-                // close this activity
-                finish();
+                        // close this activity
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(int statusCode, String errorResponse) {
+
+                        Toast.makeText(this.getContext(),
+                                "Some error occurred while fetching forms", Toast.LENGTH_LONG).show();
+
+                        // This method will be executed once the timer is over
+                        // Start your app main activity
+                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(i);
+
+                        // close this activity
+                        finish();
+                    }
+                });
+
+
             }
 
             @Override
-            public void onError(int statusCode, String errorResponse) {
-
-                Toast.makeText(this.getContext(),
-                        "Some error occurred while fetching forms", Toast.LENGTH_LONG).show();
-
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
-
-                // close this activity
-                finish();
+            public void failure(DigitsException exception) {
+                Log.d("Digits", "Sign in with Digits failure", exception);
             }
         });
 
