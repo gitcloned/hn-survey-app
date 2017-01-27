@@ -22,6 +22,8 @@ import androidadvance.com.androidsurveyexample.aws.lambda.hosp.forms.payload.lis
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.Form;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.SummaryResponse;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends Activity {
 
@@ -36,6 +38,7 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
+        Fabric.with(this, new Crashlytics());
 
         /*SummaryResponseListener listener = new SummaryResponseListener(this) {
 
@@ -113,18 +116,32 @@ public class SplashActivity extends Activity {
 
                     JSONObject formJSon = null;
 
+                        /*
                     try {
                         formJSon = new JSONObject(form);
                     } catch (JSONException e) {
                         Log.i("Splash", "Parse error: " + e);
                         e.printStackTrace();
-                    }
+                    }*/
 
                     //Log.i("Splash", "Got result *************************** form: " + form);
 
                     if(Description == null) Description = "";
 
                     Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
+
+                    if (treeMap.containsKey("SMSN")) {
+                        nForm.setSMSN(treeMap.get("SMSN"));
+                    }
+
+                    if (treeMap.containsKey("EmailN")) {
+                        nForm.setEmailN(treeMap.get("EmailN"));
+                    }
+
+                    if (treeMap.containsKey("MaxScore")) {
+                        nForm.setMaxScore(treeMap.get("MaxScore"));
+                    }
+
                     summaryResponse.addForm(nForm);
                 }
                 /*
