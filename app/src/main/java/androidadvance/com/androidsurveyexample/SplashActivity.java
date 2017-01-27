@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
@@ -38,6 +41,11 @@ public class SplashActivity extends Activity {
     private static final String TWITTER_KEY = "Cof6qTszd3KyOT4B8bjQwF2GQ";
     private static final String TWITTER_SECRET = "wgWRtzB1gRfkZ5I7jFvzrqJ59A9EqtnPoKdScaBBYMcGcjVQtL";
 
+    AlphaAnimation inAnimation;
+    AlphaAnimation outAnimation;
+
+    FrameLayout progressBarHolder;
+
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
@@ -50,6 +58,8 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
+
+        progressBarHolder = (FrameLayout) findViewById(R.id.progressBarHolder);
 
         Digits.Builder digitsBuilder = new Digits.Builder().withTheme(R.style.CustomDigitsTheme);
 
@@ -103,9 +113,10 @@ public class SplashActivity extends Activity {
 
         //DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         //digitsButton.setCallback(new AuthCallback() {
-        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
+        final DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         digitsButton.setText("Login");
         digitsButton.setBackgroundColor(getResources().getColor(R.color.primary_dark));
+        digitsButton.setHeight(35);
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
@@ -119,6 +130,12 @@ public class SplashActivity extends Activity {
                 Crashlytics.setUserEmail(session.getEmail().address);
                 Crashlytics.setUserName(session.getPhoneNumber());
 
+                digitsButton.setVisibility(View.GONE);
+                inAnimation = new AlphaAnimation(0f, 1f);
+                inAnimation.setDuration(200);
+                progressBarHolder.setAnimation(inAnimation);
+                progressBarHolder.setVisibility(View.VISIBLE);
+
 
                 Log.i("Splash", "Getting result ***************************");
                 new HospFormsAPI(getApplicationContext()).getForms(new FormsResponseListener(getApplicationContext()) {
@@ -129,6 +146,11 @@ public class SplashActivity extends Activity {
                         //Log.i("Splash", "Got result *************************** len: " + response.toString());
                         //Log.i("Splash", "Got result *************************** len: " + response.getClass().getName());
                         //Log.i("Splash", "Got result *************************** len: " + response.get(0).getClass().getName());
+
+                        outAnimation = new AlphaAnimation(1f, 0f);
+                        outAnimation.setDuration(200);
+                        progressBarHolder.setAnimation(outAnimation);
+                        progressBarHolder.setVisibility(View.GONE);
 
                         SummaryResponse summaryResponse = new SummaryResponse();
 
