@@ -13,7 +13,8 @@
         android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
         android:theme="@style/AppTheme" >
         <activity android:name=".SplashActivity"
-            android:label="Forms">
+            android:label="Forms"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,14 +29,16 @@
         <!-- Main activity -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/form_module" >
+            android:label="@string/form_module"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Survey Activity -->
         <activity
             android:name="com.androidadvance.androidsurvey.SurveyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"></activity>
 
 
     </application>

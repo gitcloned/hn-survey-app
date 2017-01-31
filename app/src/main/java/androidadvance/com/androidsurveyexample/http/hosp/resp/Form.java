@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import androidadvance.com.androidsurveyexample.R;
 import androidadvance.com.androidsurveyexample.http.hosp.resp.pojo.SurveyPojo;
 
 /**
@@ -102,5 +103,13 @@ public class Form  implements Serializable {
 
     public void setMaxScore(String maxScore) {
         MaxScore = maxScore;
+    }
+
+    public int getImageIcon() {
+
+        if(this.name.equals("OPD Form"))
+            return R.mipmap.opd_form;
+
+        return R.mipmap.opd_form;
     }
 }

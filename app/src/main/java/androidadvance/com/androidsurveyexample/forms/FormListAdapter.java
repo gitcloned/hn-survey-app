@@ -68,6 +68,8 @@ public class FormListAdapter extends BaseAdapter {
         TextView descriptionText = (TextView)
                 itemView.findViewById(R.id.formDescription);
 
+        //imageView.setImageDrawable(mContext.getResources().getDrawable(((Form)getItem(i)).getImageIcon()));
+
         String title = ((Form)getItem(i)).getName();
         titleText.setText(title);
         String description = ((Form)getItem(i)).getDescription();

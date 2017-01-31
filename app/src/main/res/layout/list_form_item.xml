@@ -11,9 +11,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
-        android:src="@mipmap/ic_launcher_form"
-        android:alpha="0.6"
-        android:background="#ffcccccc" />
+        android:src="@mipmap/opd_form"
+        android:alpha="0.6" />
 
     <TextView
         android:id="@+id/formTitle"

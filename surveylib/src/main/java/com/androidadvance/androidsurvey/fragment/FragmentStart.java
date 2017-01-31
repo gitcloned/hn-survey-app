@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
+import com.androidadvance.androidsurvey.models.Quotes;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
 
 
@@ -19,6 +20,7 @@ public class FragmentStart extends Fragment {
 
     private FragmentActivity mContext;
     private TextView textView_start;
+    private TextView textView_start_quote;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +29,10 @@ public class FragmentStart extends Fragment {
                 R.layout.fragment_start, container, false);
 
         textView_start = (TextView) rootView.findViewById(R.id.textView_start);
+        textView_start_quote = (TextView) rootView.findViewById(R.id.textView_start_quote);
+
+
+
         Button button_continue = (Button) rootView.findViewById(R.id.button_continue);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +54,6 @@ public class FragmentStart extends Fragment {
         assert survery_properties != null;
         textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
 
-
-
-
+        textView_start_quote.setText(Quotes.getInstance().getRandomQuote().getQuote());
     }
 }
