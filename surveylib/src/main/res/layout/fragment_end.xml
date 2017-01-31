@@ -4,21 +4,67 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/opd_form"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some Quote here"
+            android:id="@+id/textView_end_quote"
+            android:textColor="#333"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By"
+            android:id="@+id/textView_end_quote_by"
+            android:textColor="#333"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:textStyle="italic"/>
+
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="96dp"
-        android:gravity="center"
         android:text="New Text"
-        android:textColor="#333"
         android:textIsSelectable="false"
-        android:textSize="16sp" />
+        android:textColor="#666"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:layout_gravity="bottom"
+
+        android:layout_above="@+id/button_finish"
+        android:layout_alignParentBottom="true"/>
 
     <Button
         android:id="@+id/button_finish"
