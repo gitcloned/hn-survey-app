@@ -1,5 +1,6 @@
 package com.androidadvance.androidsurvey;
 
+import android.graphics.Typeface;
 import android.util.Log;
 
 import com.androidadvance.androidsurvey.models.Answer;
@@ -26,6 +27,7 @@ public class Answers {
 
     private String UserName;
     private String UserContact;
+    private Typeface font;
 
     public String getUserName() {
         return UserName;
@@ -41,6 +43,14 @@ public class Answers {
 
     public void setUserContact(String userContact) {
         UserContact = userContact;
+    }
+
+    public Typeface getFont() {
+        return font;
+    }
+
+    public void setFont(Typeface font) {
+        this.font = font;
     }
 
     private Answers() {

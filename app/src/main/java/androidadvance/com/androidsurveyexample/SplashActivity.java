@@ -66,57 +66,11 @@ public class SplashActivity extends Activity {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new TwitterCore(authConfig), digitsBuilder.build());
 
-        /*SummaryResponseListener listener = new SummaryResponseListener(this) {
-
-            @Override
-            public void onResponse(SummaryResponse response) {
-
-                Config.getInstance().setSummaryResponse(response);
-
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(i);
-
-                // close this activity
-                finish();
-            }
-
-            @Override
-            public void onError(int statusCode, String error) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(null);
-                builder.setTitle("ERROR !!");
-                builder.setMessage("Error getting data from the Internet.\nNetwork Unavailable!");
-
-                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-//                Toast.makeText("Network Unavailable!", Toast.LENGTH_LONG).show();
-            }
-        };
-
-        try {
-            new HospRestClientUsage().getSummary(listener);
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-
-        }*/
-
-        //DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
-        //digitsButton.setCallback(new AuthCallback() {
         final DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         digitsButton.setText("Login");
         digitsButton.setBackgroundColor(getResources().getColor(R.color.primary_dark));
         digitsButton.setHeight(35);
+
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
@@ -136,17 +90,13 @@ public class SplashActivity extends Activity {
                 progressBarHolder.setAnimation(inAnimation);
                 progressBarHolder.setVisibility(View.VISIBLE);
 
-
-                Log.i("Splash", "Getting result ***************************");
+                /* Get the hospital forms
+                * */
                 new HospFormsAPI(getApplicationContext()).getForms(new FormsResponseListener(getApplicationContext()) {
                     @Override
                     public void onResponse(ArrayList<Object> response) {
 
-                        //Log.i("Splash", "Got result *************************** len: " + response.size());
-                        //Log.i("Splash", "Got result *************************** len: " + response.toString());
-                        //Log.i("Splash", "Got result *************************** len: " + response.getClass().getName());
-                        //Log.i("Splash", "Got result *************************** len: " + response.get(0).getClass().getName());
-
+                        // parse summary reponse
                         outAnimation = new AlphaAnimation(1f, 0f);
                         outAnimation.setDuration(200);
                         progressBarHolder.setAnimation(outAnimation);
@@ -171,20 +121,6 @@ public class SplashActivity extends Activity {
                             if (Description == null)
                                 Description = "Gather feedback";
 
-                            JSONObject formJSon = null;
-
-                        /*
-                    try {
-                        formJSon = new JSONObject(form);
-                    } catch (JSONException e) {
-                        Log.i("Splash", "Parse error: " + e);
-                        e.printStackTrace();
-                    }*/
-
-                            //Log.i("Splash", "Got result *************************** form: " + form);
-
-                            if(Description == null) Description = "";
-
                             Form nForm = new Form(FormId, Name, Description, "SPPC", form, password);
 
                             if (treeMap.containsKey("SMSN")) {
@@ -201,42 +137,8 @@ public class SplashActivity extends Activity {
 
                             summaryResponse.addForm(nForm);
                         }
-                /*
 
-
-
-                Log.i("Splash", "Contain name: " + treeMap.containsKey("FormId"));
-
-
-
-                try {
-                    JSONArray array = new JSONArray(response.toString());
-
-                    for (int i = 0; i<array.length(); i++){
-
-                        JSONObject obj = array.getJSONObject(i);
-
-                        Form form = new Form(obj.getString("FormId")
-                                , obj.getString("Name")
-                                , obj.getString("Description")
-                                , Config.getInstance().getClientId()
-                                , null);
-                        summaryResponse.addForm(form);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                /*
-                for (HospitalForm hospForm : response) {
-
-                    Form form = new Form(hospForm.getFormId(), hospForm.getName(), hospForm.getDescription(), Config.getInstance().getClientId(), null);
-                    summaryResponse.addForm(form);
-                }
-
-                Config.getInstance().setHospitalForms(response);
-                */
-                        Config.getInstance().setSummaryResponse(summaryResponse);
+                       Config.getInstance().setSummaryResponse(summaryResponse);
 
                         // This method will be executed once the timer is over
                         // Start your app main activity

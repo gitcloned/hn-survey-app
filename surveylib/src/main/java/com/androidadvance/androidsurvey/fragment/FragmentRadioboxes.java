@@ -33,7 +33,7 @@ public class FragmentRadioboxes extends Fragment {
     private RadioGroup radioGroup;
     private final ArrayList<RadioButton> allRb = new ArrayList<>();
     private boolean at_leaset_one_checked = false;
-
+    private String language = "English";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +50,8 @@ public class FragmentRadioboxes extends Fragment {
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
+
+        language = (String)getArguments().getSerializable("language");
 
         return rootView;
     }
@@ -97,10 +99,10 @@ public class FragmentRadioboxes extends Fragment {
         mContext = getActivity();
         q_data = (Question) getArguments().getSerializable("data");
 
-        textview_q_title.setText(q_data.getQuestionTitle());
+        textview_q_title.setText(q_data.getQuestionTitle(language));
 
 
-        List<String> qq_data = q_data.getChoices();
+        List<String> qq_data = q_data.getChoices(language);
 
         /*if (q_data.getRandomChoices()) {
             Collections.shuffle(qq_data);

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.androidadvance.androidsurvey.SurveyActivity;
 
@@ -42,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private static final int SURVEY_REQUEST = 1337;
     private static final String TAG = "Main";
 
-    private void initiateForm(Form form) {
+    private void initiateForm(Form form, String language) {
 
         Intent i_survey = new Intent(MainActivity.this, SurveyActivity.class);
         //you have to pass as an extra the json string.
         i_survey.putExtra("json_survey", form.getFormContent());
         i_survey.putExtra("form_id", form.getId());
         i_survey.putExtra("form_title", form.getName());
+        i_survey.putExtra("language", language);
 
         //Log.d("****", "****************** Got Form Content ******************");
         //Log.v("Form Content", form.getFormContent());
@@ -89,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
                     final EditText userInput = (EditText) promptsView
                             .findViewById(R.id.editTextDialogUserInput);
+                    final ToggleButton languageToggle = (ToggleButton) promptsView
+                            .findViewById(R.id.toggleButton2);
 
                     // set dialog message
                     alertDialogBuilder
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                             // edit text
                                             if (userInput.getText().toString().equals(password)) {
 
-                                                MainActivity.this.initiateForm(form);
+                                                MainActivity.this.initiateForm(form, languageToggle.getText().toString());
                                             } else {
 
                                                 userInput.setText("");
@@ -125,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
                 else
-                    MainActivity.this.initiateForm(form);
+                    MainActivity.this.initiateForm(form, "English");
 
 
             }

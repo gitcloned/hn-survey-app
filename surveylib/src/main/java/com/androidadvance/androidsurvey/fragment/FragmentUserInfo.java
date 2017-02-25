@@ -23,6 +23,7 @@ import com.androidadvance.androidsurvey.models.SurveyProperties;
 public class FragmentUserInfo extends Fragment {
 
     private FragmentActivity mContext;
+    private String language = "English";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,8 +32,10 @@ public class FragmentUserInfo extends Fragment {
                 R.layout.fragment_user_info, container, false);
 
         Button button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        final TextView userInfoTextView = (TextView) rootView.findViewById(R.id.userInfoTitle);
         final EditText userNameText = (EditText) rootView.findViewById(R.id.userNameText);
         final EditText userNamePhone = (EditText) rootView.findViewById(R.id.userNamePhone);
+
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +46,15 @@ public class FragmentUserInfo extends Fragment {
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
+
+        language = (String)getArguments().getSerializable("language");
+
+        if (language.equals("Hindi")) {
+
+            userInfoTextView.setText("कृपया अपने बारे मे बताए:");
+            userNameText.setHint("नाम");
+            userNamePhone.setHint("मोबाइल नंबर");
+        }
 
         return rootView;
     }

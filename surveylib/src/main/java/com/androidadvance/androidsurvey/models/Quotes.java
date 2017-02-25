@@ -9,10 +9,17 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Quotes {
 
-    private static Quotes instance;
+    private static Quotes hindiInstance;
+    private static Quotes englishInstance;
     private ArrayList<Quote> quotes;
 
-    private Quotes() {
+    private int startIdx = 0;
+    private int endIdx = 0;
+
+    private Quotes(int startIdx, int endIdx) {
+
+        this.startIdx = startIdx;
+        this.endIdx = endIdx;
 
         quotes = new ArrayList<Quote>();
 
@@ -22,18 +29,30 @@ public class Quotes {
         quotes.add(new Quote("There's nothing more important than our good health - that's our principal capital asset. ","Arlen Specter"));
         quotes.add(new Quote("Good health is not something we can buy. However, it can be an extremely valuable savings account.","Anne Wilson Schaef"));
         quotes.add(new Quote("Good health and good sense are two of life's greatest blessings. ","Publilius Syrus"));
+
+        quotes.add(new Quote("स्वास्थ का मतलब शारीरिक, मानसिक और सामजिक रूप से मजबूती है", ""));
+        quotes.add(new Quote("अच्छे स्वास्थ्य में शरीर रखना एक कर्तव्य है … अन्यथा हम हमारे मन को मजबूत और साफ रखने के लिए सक्षम नहीं हो पाएंगे", "गौतम बुध"));
+        quotes.add(new Quote("स्वस्थ्य सबसे बड़ा उपहार है, संतोष सबसे बड़ा धन है, वफ़ादारी सबसे बड़ा सम्बन्ध है.", "गौतम बुध"));
+        quotes.add(new Quote("बिना सेहत के जीवन जीवन नहीं है; बस पीड़ा की एक स्थिति है- मौत की छवि है.", "गौतम बुध"));
     }
 
-    public static synchronized Quotes getInstance(){
-        if(instance==null){
-            instance=new Quotes();
+    public static synchronized Quotes getInstance(String language){
+        if (language.equals("Hindi")) {
+            if (hindiInstance == null) {
+                hindiInstance = new Quotes(6, 9);
+            }
+            return hindiInstance;
+        } else {
+            if (englishInstance == null) {
+                englishInstance = new Quotes(0, 5);
+            }
+            return englishInstance;
         }
-        return instance;
     }
 
     public Quote getRandomQuote() {
 
-        int idx = ThreadLocalRandom.current().nextInt(0, quotes.size() - 1);
+        int idx = ThreadLocalRandom.current().nextInt(this.startIdx, this.endIdx);
         return quotes.get(idx);
     }
 }

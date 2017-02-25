@@ -30,6 +30,7 @@ public class SurveyActivity extends AppCompatActivity {
     private String formId;
     private ViewPager mPager;
     private String style_string = null;
+    private String language = "English";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,10 @@ public class SurveyActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             Log.i("Survey", "Got form id: " + bundle.getString("form_id"));
-            Log.i("Survey", "Got pojo: " + bundle.getString("json_survey"));
+
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
-            Log.i("Survey", "Got pojo qs: " + mSurveyPojo.getQuestions().size());
             formId = bundle.getString("form_id");
+            language = bundle.getString("language");
 
             ActionBar ab = getActionBar();
             ab.setTitle(bundle.getString("form_title"));
@@ -52,9 +53,6 @@ public class SurveyActivity extends AppCompatActivity {
             }
         }
 
-
-        Log.i("json Object = ", String.valueOf(mSurveyPojo.getQuestions()));
-
         final ArrayList<Fragment> arraylist_fragments = new ArrayList<>();
 
         //- START -
@@ -63,6 +61,7 @@ public class SurveyActivity extends AppCompatActivity {
             Bundle sBundle = new Bundle();
             sBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
             sBundle.putString("style", style_string);
+            sBundle.putString("language", language);
             frag_start.setArguments(sBundle);
             arraylist_fragments.add(frag_start);
         }
@@ -70,6 +69,7 @@ public class SurveyActivity extends AppCompatActivity {
         FragmentUserInfo frag_userInfo = new FragmentUserInfo();
         Bundle fuBundle = new Bundle();
         fuBundle.putString("style", style_string);
+        fuBundle.putString("language", language);
         frag_userInfo.setArguments(fuBundle);
         arraylist_fragments.add(frag_userInfo);
 
@@ -83,6 +83,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putString("language", language);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -92,6 +93,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putString("language", language);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -101,6 +103,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putString("language", language);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -110,6 +113,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putString("language", language);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -119,6 +123,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putString("language", language);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -130,6 +135,7 @@ public class SurveyActivity extends AppCompatActivity {
         Bundle eBundle = new Bundle();
         eBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
         eBundle.putString("style", style_string);
+        eBundle.putString("language", language);
         frag_end.setArguments(eBundle);
         arraylist_fragments.add(frag_end);
 

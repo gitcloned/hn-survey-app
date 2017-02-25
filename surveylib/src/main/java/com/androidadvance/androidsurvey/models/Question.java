@@ -16,6 +16,9 @@ public class Question implements Serializable {
     @SerializedName("question_title")
     @Expose
     private String questionTitle;
+    @SerializedName("question_title_h")
+    @Expose
+    private String questionTitleHindi;
     @SerializedName("description")
     @Expose
     private String description;
@@ -28,6 +31,9 @@ public class Question implements Serializable {
     @SerializedName("choices")
     @Expose
     private List<String> choices = new ArrayList<String>();
+    @SerializedName("choices_hindi")
+    @Expose
+    private List<String> choices_hindi = new ArrayList<String>();
     @SerializedName("min")
     @Expose
     private Integer min;
@@ -75,6 +81,18 @@ public class Question implements Serializable {
      */
     public String getQuestionTitle() {
         return questionTitle;
+    }
+
+    /**
+     *
+     * @return
+     * The questionTitle
+     */
+    public String getQuestionTitle(String language) {
+        if (language.equals("Hindi"))
+            return  questionTitleHindi;
+        else
+            return questionTitle;
     }
 
     /**
@@ -146,6 +164,15 @@ public class Question implements Serializable {
      * The choices
      */
     public List<String> getChoices() {
+        return choices;
+    }
+
+    /**
+     *
+     * @return
+     * The choices
+     */
+    public List<String> getChoices(String language) {
         return choices;
     }
 
@@ -243,4 +270,8 @@ public class Question implements Serializable {
     public void setScores(List<Integer> scores) {
         this.scores = scores;
     }
+
+    public String getQuestionTitleHindi() { return questionTitleHindi; }
+
+    public void setQuestionTitleHindi(String questionTitleHindi) { this.questionTitleHindi = questionTitleHindi; }
 }

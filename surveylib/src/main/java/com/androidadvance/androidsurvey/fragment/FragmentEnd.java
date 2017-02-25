@@ -57,7 +57,7 @@ public class FragmentEnd extends Fragment {
 
         assert survery_properties != null;
 
-        Quote quote = Quotes.getInstance().getRandomQuote();
+        Quote quote = Quotes.getInstance("English").getRandomQuote();
 
         textView_start_quote.setText(quote.getQuote());
         textView_start_quote_by.setText("- " + quote.getAuthor());
