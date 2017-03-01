@@ -52,6 +52,11 @@ public class FragmentStart extends Fragment {
 
         language = (String)getArguments().getSerializable("language");
 
+        if (language.equals("Hindi"))
+            button_continue.setText("प्रारंभ");
+        else
+            button_continue.setText("Start");
+
         return rootView;
     }
 
@@ -70,10 +75,6 @@ public class FragmentStart extends Fragment {
         textView_start_quote_by.setText("- " + quote.getAuthor());
         //textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
 
-        if (language.equals("Hindi")) {
-            textView_start.setText("आपके सुझाव हमें सुधार करने मे सहायक होंगे");
-        } else {
-            textView_start.setText("Your feedback will us improve");
-        }
+        textView_start.setText(survery_properties.getIntroMessage(language));
     }
 }

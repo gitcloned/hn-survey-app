@@ -1,6 +1,7 @@
 package androidadvance.com.androidsurveyexample;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import androidadvance.com.androidsurveyexample.aws.lambda.hosp.forms.HospitalForm;
 import androidadvance.com.androidsurveyexample.http.hosp.Device;
@@ -14,10 +15,13 @@ public class Config {
 
     private static Config instance;
     private String ClientId = "SPPC";
+    private String ENV = "DEV";
 
     public String getClientId() {
         return ClientId;
     }
+
+    public String getENV() { return ENV; }
 
     public SummaryResponse getSummaryResponse() {
         return summaryResponse;

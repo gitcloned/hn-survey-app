@@ -9,6 +9,7 @@ public class FormsRequest {
     private String name = "forms";
     private String select = "";
     private String ClientId;
+    private String env;
 
     public String getName() {
         return name;
@@ -34,10 +35,15 @@ public class FormsRequest {
         this.select = select;
     }
 
-    public FormsRequest(String clientId, String select)
+    public String getEnv() { return env; }
+
+    public void setEnv(String env) { this.env = env; }
+
+    public FormsRequest(String clientId, String select, String env)
     {
         ClientId = clientId;
         this.select = select;
+        this.env = env == null ? "DEV" : env;
     }
 
     public FormsRequest() {

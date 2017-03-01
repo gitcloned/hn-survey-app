@@ -13,9 +13,15 @@ public class SurveyProperties implements Serializable {
     @SerializedName("intro_message")
     @Expose
     private String introMessage;
+    @SerializedName("intro_message_h")
+    @Expose
+    private String introMessageHindi;
     @SerializedName("end_message")
     @Expose
     private String endMessage;
+    @SerializedName("end_message_h")
+    @Expose
+    private String endMessageHindi;
     @SerializedName("skip_intro")
     @Expose
     private Boolean skipIntro;
@@ -45,6 +51,17 @@ public class SurveyProperties implements Serializable {
     }
 
     /**
+     * @return The introMessage
+     */
+    public String getIntroMessage(String language)
+    {
+        if (language.equals("Hindi"))
+            return introMessageHindi;
+        else
+            return introMessage;
+    }
+
+    /**
      * @param introMessage The intro_message
      */
     public void setIntroMessage(String introMessage) {
@@ -56,6 +73,16 @@ public class SurveyProperties implements Serializable {
      */
     public String getEndMessage() {
         return endMessage;
+    }
+
+    /**
+     * @return The endMessage
+     */
+    public String getEndMessage(String language) {
+        if (language.equals("Hindi"))
+            return endMessageHindi;
+        else
+            return endMessage;
     }
 
     /**

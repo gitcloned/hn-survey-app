@@ -173,7 +173,10 @@ public class Question implements Serializable {
      * The choices
      */
     public List<String> getChoices(String language) {
-        return choices;
+        if (language.equals("Hindi"))
+            return choices_hindi;
+        else
+            return choices;
     }
 
     /**

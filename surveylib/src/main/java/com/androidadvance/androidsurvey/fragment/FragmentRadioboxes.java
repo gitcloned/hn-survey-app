@@ -53,6 +53,11 @@ public class FragmentRadioboxes extends Fragment {
 
         language = (String)getArguments().getSerializable("language");
 
+        if (language.equals("Hindi"))
+            button_continue.setText("अगला");
+        else
+            button_continue.setText("Continue");
+
         return rootView;
     }
 

@@ -43,6 +43,7 @@ public class HospFormsAPI {
                 // invoke "echo" method. In case it fails, it will throw a
                 // LambdaFunctionException.
                 Log.i(TAG, "doing in background ***************************");
+                Log.i(TAG, params[0].toString());
                 try {
                     return contract.getForms(params[0]);
                 } catch (LambdaFunctionException lfe) {
@@ -64,6 +65,6 @@ public class HospFormsAPI {
 
                 Log.i(TAG, "Got result ***************************");
             }
-        }.execute(new FormsRequest(Config.getInstance().getClientId(), "detail"));
+        }.execute(new FormsRequest(Config.getInstance().getClientId(), "detail", Config.getInstance().getENV()));
     }
 }

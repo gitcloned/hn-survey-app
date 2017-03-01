@@ -23,6 +23,7 @@ public class FragmentEnd extends Fragment {
     private TextView textView_end;
     private TextView textView_start_quote;
     private TextView textView_start_quote_by;
+    private String language = "English";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +46,13 @@ public class FragmentEnd extends Fragment {
             }
         });
 
+        language = (String)getArguments().getSerializable("language");
+
+        if (language.equals("Hindi"))
+            button_finish.setText("समाप्त");
+        else
+            button_finish.setText("Finish");
+
         return rootView;
     }
 
@@ -57,12 +65,12 @@ public class FragmentEnd extends Fragment {
 
         assert survery_properties != null;
 
-        Quote quote = Quotes.getInstance("English").getRandomQuote();
+        Quote quote = Quotes.getInstance(language).getRandomQuote();
 
         textView_start_quote.setText(quote.getQuote());
         textView_start_quote_by.setText("- " + quote.getAuthor());
 
-        textView_end.setText(Html.fromHtml(survery_properties.getEndMessage()));
+        textView_end.setText(Html.fromHtml(survery_properties.getEndMessage(language)));
 
     }
 }
