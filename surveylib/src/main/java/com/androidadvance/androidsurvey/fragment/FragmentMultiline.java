@@ -44,6 +44,12 @@ public class FragmentMultiline extends Fragment {
             @Override public void onClick(View v) {
                  Answers.getInstance().put_answer(question, editText_answer.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
+
+                View view = mContext.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Service.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         });
 
@@ -83,9 +89,9 @@ public class FragmentMultiline extends Fragment {
         Log.i("Multiline", "Language is: "+ language);
 
         textview_q_title.setText(Html.fromHtml(q_data.getQuestionTitle(language)));
-        editText_answer.requestFocus();
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Service.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(editText_answer, 0);
+        //editText_answer.requestFocus();
+        //InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Service.INPUT_METHOD_SERVICE);
+        //imm.showSoftInput(editText_answer, 0);
 
 
     }
